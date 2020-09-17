@@ -19,8 +19,8 @@ Simply include both the javascript file and the css stylesheet in your HTML docu
 It's best if you put them at the bottom, close to the closing `<\body>` tag.
 
 ```html
-<script src="heiho/heiho.js"></script>
-<link rel="stylesheet" type="text/css" href="heiho/heiho.css" />
+<script src="/path/to/heiho.js"></script>
+<link rel="stylesheet" type="text/css" href="/path/to/heiho.css" />
 ```
 
 Explore more cases in the examples section below.
