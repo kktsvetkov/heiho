@@ -3,58 +3,24 @@
 * @link https://github.com/kktsvetkov/heiho
 */
 
-var heiho = {
-	options: {
-		title: 'Preview',
-		max: 35
-	},
-
-	id: 'heiho-view',
-
-	elements: [],
-
-	load: function()
+;(function(root, factory)
+{
+	if (typeof exports === 'object')
 	{
-		var el = heiho.elements;
-		if (el.length > 0)
-		{
-			return el;
-		}
-
-		el[0] = document.createElement('div');
-		el[0].setAttribute('id', heiho.id);
-		el[0].style.display = 'none';
-
-		el[1] = document.createElement('div');
-		el[1].setAttribute('id', heiho.id + '-header');
-		el[0].appendChild(el[1]);
-
-		el[2] = document.createElement('div');
-		el[2].setAttribute('id', heiho.id + '-scroll');
-		el[0].appendChild(el[2]);
-
-		el[3] = document.createElement('table');
-		el[3].setAttribute('id', heiho.id + '-table');
-		el[2].appendChild(el[3]);
-
-		el[4] = document.createElement('tr');
-		el[4].setAttribute('id', heiho.id + '-thead');
-		el[3].appendChild(el[4]);
-
-		el[5] = document.createElement('tbody');
-		el[5].setAttribute('id', heiho.id + '-tbody');
-		el[3].appendChild(el[5]);
-
-		el[6] = document.createElement('div');
-		el[6].setAttribute('id', heiho.id + '-truncated');
-		el[6].style.display = 'none';
-		el[0].appendChild(el[6]);
-
-		document.body.appendChild(el[0]);
-		return el;
-	},
-
-	width: function(data)
+		module.exports = factory(window, document)
+	} else
+	{
+		root.Heiho = factory(window, document)
+  	}
+})(this, function(w, d)
+{
+	/**
+	* Count number of columbs in array or object
+	*
+	* @param {Array|Object} data
+	* @return {Integer}
+	*/
+	function cols(data)
 	{
 		var cols = 0;
 		for (var i in data)
@@ -78,15 +44,98 @@ var heiho = {
 		}
 
 		return cols;
-	},
+	}
 
 	/**
-	* Return column title based on integer index, e.g. "B" for 2, "AA" for 27
+	* Creates the DOM elements of the preview
+	*
+	* @param {String} id common prefix for ids of DOM elements
+	* @return {Object} collection of elements
+	*/
+	function load(id)
+	{
+		var el = {};
+
+		/* outter preview shell */
+		el.shell = document.createElement('div');
+		el.shell.setAttribute('id', id);
+		el.shell.style.display = 'none';
+
+		/* preview header */
+		el.header = document.createElement('div');
+		el.header.setAttribute('id', id + '-header');
+		el.shell.appendChild(el.header);
+
+		/* preview header close button */
+		el.close = document.createElement('div');
+		el.close.setAttribute('id', id + '-close');
+		el.header.appendChild(el.close);
+
+		/* preview header title caption */
+		el.title = document.createElement('div');
+		el.title.setAttribute('id', id + '-title');
+		el.header.appendChild(el.title);
+
+		/* scrollable wrap of the preview grid  */
+		el.scroll = document.createElement('div');
+		el.scroll.setAttribute('id', id + '-scroll');
+		el.shell.appendChild(el.scroll);
+
+		/* preview table grid */
+		el.table = document.createElement('table');
+		el.table.setAttribute('id', id + '-table');
+		el.scroll.appendChild(el.table);
+
+		/* preview grid thead */
+		el.thead = document.createElement('tr');
+		el.thead.setAttribute('id', id + '-thead');
+		el.table.appendChild(el.thead);
+
+		/* preview grid tbody */
+		el.tbody = document.createElement('tbody');
+		el.tbody.setAttribute('id', id + '-tbody');
+		el.table.appendChild(el.tbody);
+
+		/* preview truncate warning */
+		el.truncate = document.createElement('div');
+		el.truncate.setAttribute('id', id + '-truncated');
+		el.truncate.style.display = 'none';
+		el.shell.appendChild(el.truncate);
+
+		/*
+		* shell
+		*  |
+		*  + header
+		*  |  |
+		*  |  + close
+		*  |  |
+		*  |  + title
+		*  |
+		*  + scroll
+		*  |  |
+		*  |  + table
+		*  |     |
+		*  |     + thead
+		*  |     |
+		*  |     + tbody
+		*  |
+		*  + truncate
+		*/
+
+		document.body.appendChild(el.shell);
+		return el;
+	}
+
+	/**
+	* Return TH column title based on integer index
+	*
+	* Column titles are only alphabet letters, using the 26 ascii
+	* uppercase chars, e.g. "B" for 2, "AA" for 27
 	*
 	* @param {Integer} i
 	* @retun {String}
 	*/
-	col: function(i)
+	function label(i)
 	{
 		i = parseInt(i);
 		if (!i)
@@ -104,46 +153,145 @@ var heiho = {
 
 		h = String.fromCharCode(64 + j) + h;
 		return h;
-	},
+	}
 
-	view: function(data, o)
+	/**
+	* Resise the preview
+	*
+	* @param {Array} el collection of preview elements
+	*/
+	function resize(el)
 	{
-		var el = heiho.load();
-
-		var opts = heiho.options;
-		o = o || opts;
-
-		// header title
-		//
-		o.title = o.title || opts.title;
-		el[1].innerText = o.title;
-
-		var cols = heiho.width(data);
-
-		// grid header
-		//
-		el[4].innerHTML = '';
-		for (var i = 0; i <= cols; i++)
+		/* span the grid to full page width */
+		if (el.shell.offsetWidth > el.table.offsetWidth)
 		{
-			var th = document.createElement('th');
-			th.innerHTML = heiho.col(i);
-			el[4].appendChild(th);
+			el.table.className += ' width100';
 		}
 
-		// grid rows
-		//
-		el[5].innerHTML = '';
+		/* adjust height */
+		el.scroll.style.height = '';
+		var height = el.shell.offsetHeight
+			- 2 /* bottom offset */
+			- el.header.offsetHeight
+			- el.truncate.offsetHeight;
+		if (height < el.table.offsetHeight)
+		{
+			el.scroll.style.height = height + 'px';
+		}
+	}
+
+	/**
+	* @var {Object} default options
+	*/
+	var options = {
+
+		/**
+		* @var {String} prefix for all HTML ids used in the preview
+		*/
+		id: 'heiho-view',
+
+		/**
+		* @var {Integer} max number of rows to preview
+		*/
+		max: 35,
+
+		/**
+		* @var {Function} renders the preview title contents
+		* @param {DomElement} el the preview element
+		* @param {Object} o extra options
+		*/
+		title: function(el, o)
+		{
+			var title = 'Preview';
+			if ('title' in o)
+			{
+				title = o.title;
+			}
+
+			el.innerHTML = title;
+		},
+
+		/**
+		* @var {Function} renders the truncate warning contents
+		* @param {DomElement} el the truncate element
+		* @param {Integer} max
+		* @param {Array|Object} data
+		* @param {Object} o extra options
+		*/
+		truncate: function(el, max, data, o)
+		{
+			el.innerHTML = 'Showing only first ' + max + ' rows, ' + cols(data) + ' in total';
+			el.style.display = '';
+		}
+	}
+
+	/**
+	* Constructor
+	*
+	* @param {Array|Object} data
+	* @param {Object} o extra options
+	*/
+	function hh(data, o)
+	{
+		/* read options */
+		o = o || {}
+		for (var i in options)
+		{
+			if (i in o)
+			{
+				continue;
+			}
+
+			o[i] = options[i];
+		}
+
+		/* get the preview elements */
+		var el = load(o.id);
+
+		/* header title */
+		var t = o; delete t.title;
+		(typeof o.title === 'function')
+			? o.title(el.title, t)
+			: options.title(el.title, t);
+
+		/* resize preview */
+		var windowResize = function(event)
+		{
+			resize(el);
+		}
+		window.addEventListener('resize', windowResize);
+
+		/* close button */
+		el.close.addEventListener('click', function (event)
+		{
+			document.body.classList.remove('heiho-body');
+			document.body.removeChild(el.shell);
+			window.removeEventListener('resize', windowResize);
+		});
+
+		var columns = cols(data);
+
+		/* preview thead */
+		el.thead.innerHTML = '';
+		for (var i = 0; i <= columns; i++)
+		{
+			var th = document.createElement('th');
+			th.innerHTML = label(i);
+			el.thead.appendChild(th);
+		}
+
+		/* preview grid rows */
+		el.tbody.innerHTML = '';
+		el.truncate.innerHTML = '';
+
 		var rows = 0;
-
-		el[6].innerHTML = '';
-		o.max = o.max || opts.max;
-
 		for (var i in data)
 		{
 			if (++rows > o.max)
 			{
-				el[6].innerHTML = 'Showing only first ' + o.max + ' rows, ' + heiho.width(data) + ' in total';
-				el[6].style.display = '';
+				(typeof o.truncate === 'function')
+					? o.truncate(el.truncate, o.max, data, o)
+					: options.truncate(el.truncate, o.max, data, o);
 				break;
 			}
 
@@ -160,29 +308,20 @@ var heiho = {
 				tr.appendChild(td);
 			}
 
-			el[5].appendChild(tr);
+			el.tbody.appendChild(tr);
 		}
 
-		// final formatting
-		//
+		/* finally show the preview and hive everything else in the body */
 		document.body.classList.add('heiho-body');
-		el[0].style.display = '';
-		if (el[0].offsetWidth > el[3].offsetWidth)
-		{
-			el[3].className += ' width100';
-		}
-
-		el[2].style.height = ''; /* adjust height */
-		var height = el[0].offsetHeight
-			- 2 /* bottom offset */
-			- el[1].offsetHeight /* title */
-			- el[6].offsetHeight; /* truncated */
-		if (height < el[3].offsetHeight)
-		{
-			el[2].style.height = height + 'px';
-		}
+		el.shell.style.display = '';
+		resize(el);
 	}
-}
+
+	var Heiho = hh;
+	return Heiho;
+});
+
+
 
 var data = [
 	['a', 'b', 'c'],
