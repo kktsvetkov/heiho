@@ -2,7 +2,7 @@
 
 Quick spreadsheet viewer in vanilla JS
 
-![Heihō](https://repository-images.githubusercontent.com/296232032/67675c80-f8ce-11ea-997b-cf830923b13c)
+![Heihō](https://user-images.githubusercontent.com/694812/93581130-62c3a680-f9a9-11ea-8302-f47f94d4bdf5.png)
 
 # What it does ?
 
