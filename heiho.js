@@ -287,7 +287,7 @@
 		var rows = 0;
 		for (var i in data)
 		{
-			if (++rows > o.max)
+			if (o.max > 0 && ++rows > o.max)
 			{
 				(typeof o.truncate === 'function')
 					? o.truncate(el.truncate, o.max, data, o)
@@ -320,26 +320,3 @@
 	var Heiho = hh;
 	return Heiho;
 });
-
-
-
-var data = [
-	['a', 'b', 'c'],
-	[1,2,3],
-	[4,5,6],
-];
-// var data = {
-// 	a: { a1: 1, a2: 2, a3: 3 },
-// 	b: { b1: 4, b2: 5, b3: 6},
-// 	c: { c1: null, c2: 10}
-// }
-
-data = []; d = 50;
-for (var i = 0; i < d; i++)
-{
-	data[i] = [];
-	for (var l = 0; l < d; l++)
-	{
-		data[i][l] = 'proba na probata ' + (i * d + l);
-	}
-}
