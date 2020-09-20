@@ -65,4 +65,6 @@ body.heiho-body > #heiho-view {display: block}
 #heiho-view-tbody tr:hover td:hover {background:khaki}
 #heiho-view-tbody tr:hover td:first-child {background:orange; color:#111}
 
+#heiho-view-tbody tr.heiho-header td {font-weight:bold}
+
 #heiho-view-truncated {color:white; padding: .45em; background:#844; font: normal 11px arial;}

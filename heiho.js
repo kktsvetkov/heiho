@@ -15,7 +15,7 @@
 })(this, function(w, d)
 {
 	/**
-	* Count number of columbs in array or object
+	* Count number of columns in array or object
 	*
 	* @param {Array|Object} data
 	* @return {Integer}
@@ -196,6 +196,11 @@
 		max: 100,
 
 		/**
+		* @var {Bool} whether to use first row as header or not
+		*/
+		header: null,
+
+		/**
 		* @var {Function} renders the preview title contents
 		* @param {DomElement} el the preview element
 		* @param {Object} o extra options
@@ -285,6 +290,7 @@
 		el.truncate.innerHTML = '';
 
 		var rows = 0;
+		var header = [];
 		for (var i in data)
 		{
 			if (o.max > 0 && ++rows > o.max)
@@ -295,10 +301,15 @@
 				break;
 			}
 
+			if (1 === rows)
+			{
+				header = data[i];
+			}
+
 			var tr = document.createElement('tr');
 
 			var td = document.createElement('td');
-			td.innerHTML = 1 + el.tbody.childNodes.length;
+			td.innerHTML = rows;
 			tr.appendChild(td);
 
 			for (var j in data[i])
@@ -319,6 +330,42 @@
 			}
 
 			el.tbody.appendChild(tr);
+		}
+
+		/* first row is a header or not */
+		if (null === o.header)
+		{
+			o.header = true;
+
+			var j = 0;
+			for (var i in header)
+			{
+				j++;
+
+				if (!header[i])
+				{
+					o.header = false; /* empty header column */
+					break;
+				}
+
+				if (!isNaN( parseFloat(header[i]) ))
+				{
+					o.header = false; /* number in header */
+					break;
+				}
+			}
+
+			if (false !== o.header)
+			{
+				if (j < columns)
+				{
+					o.header = false; /* too short  header row */
+				}
+			}
+		}
+		if (o.header)
+		{
+			el.tbody.firstChild.classList.add('heiho-header');
 		}
 
 		/* finally show the preview and hive everything else in the body */
