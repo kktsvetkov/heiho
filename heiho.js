@@ -298,7 +298,7 @@
 			var tr = document.createElement('tr');
 
 			var td = document.createElement('td');
-			td.innerHTML = 1 + parseInt(i);
+			td.innerHTML = 1 + el.tbody.childNodes.length;
 			tr.appendChild(td);
 
 			for (var j in data[i])
@@ -306,6 +306,16 @@
 				td = document.createElement('td');
 				td.innerHTML = data[i][j];
 				tr.appendChild(td);
+			}
+
+			/* pad missing columns */
+			if (columns > tr.childNodes.length)
+			{
+				while (tr.childNodes.length <= columns)
+				{
+					td = document.createElement('td');
+					tr.appendChild(td);
+				}
 			}
 
 			el.tbody.appendChild(tr);
