@@ -102,8 +102,9 @@ Heiho(data, { title: function(el, o)
 ## Truncate
 
 Similar to how `options.title` is used as a function, `options.truncate` is
-used to populate the contents of the "truncate" element. This function gets
-more arguments:
+used to populate the contents of the "truncate" element (the warning shown when
+there are more rows to preview than the `options.max` restriction). This
+function gets more arguments:
 
 ```js
 /**
@@ -136,7 +137,7 @@ Papa.parse(file, {
 Explore all the examples on [papaparse.com](https://www.papaparse.com/), they are a blast!
 
 Here's an example of Papa Parse and Heiho previewing a remote csv file:
-```js 
+```js
 Papa.parse("http://example.com/file.csv", {
 	download: true,
 	complete: function(results) {
