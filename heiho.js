@@ -193,7 +193,7 @@
 		/**
 		* @var {Integer} max number of rows to preview
 		*/
-		max: 35,
+		max: 100,
 
 		/**
 		* @var {Function} renders the preview title contents

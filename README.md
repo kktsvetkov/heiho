@@ -50,7 +50,7 @@ There is a small set of options used to influence the output of the spreadsheet
 preview.
 
 * `options.max` is an integer value that restricts how many rows to be included
-in the preview; you can use `0` to disable it, and its' default value is 35.
+in the preview; you can use `0` to disable it, and its' default value is 100.
 
 * `options.title` this is used to output the header title; you can use a string
 to just pass a text to be inserted there, or you can use a function that manipulates
