@@ -49,6 +49,11 @@ Explore more cases in the examples section below.
 There is a small set of options used to influence the output of the spreadsheet
 preview.
 
+* `options.header` is boolean value whether to style the first row in the  
+preview differently; this meant to be used with CSV files, where the first
+row holds the column titles; default value is `null` which triggers an attempt
+to auto-detect whether the first row is header or not.
+
 * `options.max` is an integer value that restricts how many rows to be included
 in the preview; you can use `0` to disable it, and its' default value is 100.
 
