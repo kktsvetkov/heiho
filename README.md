@@ -154,7 +154,7 @@ Papa.parse("http://example.com/file.csv", {
 });
 ```
 # Demo 
-Here's a very basic example 
+Here's a quick and silly example with a list of all the members of Monty Python.
 
 <script>var monty_python = [
 	['first_name', 'last_name', 'year_of_birth', 'wiki_url'],
@@ -165,4 +165,17 @@ Here's a very basic example
 	['Eric', 'Idle', 1943, 'https://en.wikipedia.org/wiki/Eric_Idle'],
 	['Michael', 'Palin', 1943, 'https://en.wikipedia.org/wiki/Michael_Palin'],
 ];</script>
-<input type=button value="monty_python.csv" onclick="Heiho(monty_python)" />
+<input type=button value="A very naughty button" onclick="Heiho(monty_python)" />
+
+```html
+<script>var monty_python = [
+	['first_name', 'last_name', 'year_of_birth', 'wiki_url'],
+	['Graham', 'Chapman', 1941, 'https://en.wikipedia.org/wiki/Graham_Chapman'],
+	['John', 'Cleese', 1939, 'https://en.wikipedia.org/wiki/John_Cleese'],
+	['Terry', 'Gilliam', 1940, 'https://en.wikipedia.org/wiki/Terry_Gilliam'],
+	['Terry', 'Jones', 1942, 'https://en.wikipedia.org/wiki/Terry_Jones'],
+	['Eric', 'Idle', 1943, 'https://en.wikipedia.org/wiki/Eric_Idle'],
+	['Michael', 'Palin', 1943, 'https://en.wikipedia.org/wiki/Michael_Palin'],
+];</script>
+<input type=button value="A very naughty button" onclick="Heiho(monty_python)" />
+```
