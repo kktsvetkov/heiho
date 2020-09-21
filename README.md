@@ -165,7 +165,7 @@ Here's a quick and silly example with a list of all the members of Monty Python.
 	['Eric', 'Idle', 1943, 'https://en.wikipedia.org/wiki/Eric_Idle'],
 	['Michael', 'Palin', 1943, 'https://en.wikipedia.org/wiki/Michael_Palin'],
 ];</script>
-<input type=button value="A very naughty button" onclick="Heiho(monty_python)" />
+<input type=button value="A very naughty button" onclick="Heiho(monty_python, {title:"Monty Python List"})" />
 
 ```html
 <script>var monty_python = [
@@ -177,5 +177,5 @@ Here's a quick and silly example with a list of all the members of Monty Python.
 	['Eric', 'Idle', 1943, 'https://en.wikipedia.org/wiki/Eric_Idle'],
 	['Michael', 'Palin', 1943, 'https://en.wikipedia.org/wiki/Michael_Palin'],
 ];</script>
-<input type=button value="A very naughty button" onclick="Heiho(monty_python)" />
+<input type=button value="A very naughty button" onclick="Heiho(monty_python, {title:"Monty Python List"})" />
 ```
