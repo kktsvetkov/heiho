@@ -165,7 +165,7 @@ Here's a quick and silly example with a list of all the members of Monty Python.
 	['Eric', 'Idle', 1943, 'https://en.wikipedia.org/wiki/Eric_Idle'],
 	['Michael', 'Palin', 1943, 'https://en.wikipedia.org/wiki/Michael_Palin'],
 ];</script>
-<input type=button value="A very naughty button" onclick="Heiho(monty_python, {title:"Monty Python List"})" />
+<input type=button value="A very naughty button" onclick="Heiho(monty_python, {title:'Monty Python List'})" />
 
 ```html
 <script>var monty_python = [
@@ -180,7 +180,7 @@ Here's a quick and silly example with a list of all the members of Monty Python.
 <input type=button value="A very naughty button" onclick="Heiho(monty_python, {title:'Monty Python List'})" />
 ```
 
-Here's another demo using **Papa Parse** csv parsing library and a csv file: list of best pictures from https://cs.uwaterloo.ca/~s255khan/oscars.html
+Here's another demo using **Papa Parse** csv parsing library and a csv file: list of best pictures from (cs.uwaterloo.ca/~s255khan/oscars.html)[https://cs.uwaterloo.ca/~s255khan/oscars.html]
 
-<script src="heiho.js">https://cdn.jsdelivr.net/gh/mholt/PapaParse@latest/papaparse.js</script>
+<script src="//cdn.jsdelivr.net/gh/mholt/PapaParse@latest/papaparse.min.js"></script>
 <input type=button value="Best Picture Oscar Winners" onclick="Papa.parse('pictures.csv', {download:true, complete:function(results){ Heiho(results.data, {title:'pictures.csv'}) }});  " />
