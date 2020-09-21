@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="heiho.css" />
+<script src="heiho.js"></script>
+
 # Heihō
 
 Quick spreadsheet viewer in vanilla JS
