@@ -55,16 +55,16 @@ body.heiho-body > #heiho-view {display: block}
 #heiho-view-table {background:white; color:black; font: 12px arial; border-collapse: collapse;}
 #heiho-view-table.width100 {width:100%}
 
-#heiho-view-thead th {background: #444; color: white; min-width: 40px; border: solid 1px black; padding: 4px;}
-#heiho-view-thead th:first-child {min-width: 0; background: #111}
+#heiho-view-thead th {background: #444; color: white; border: solid 1px black; padding: 4px;}
+#heiho-view-thead th:first-child {background: #111}
 
-#heiho-view-tbody td {background: white; color: #555; padding: 1px 3px; border: solid 1px #ccc; vertical-align: top}
+#heiho-view-tbody td {background: white; color: #555; padding: 2px 4px; border: solid 1px #ccc; vertical-align: top; white-space: nowrap; overflow: hidden; max-width: 20vw; min-width: 1vw}
 #heiho-view-tbody td:first-child {background: #444; color: #bbb; width: 1%; min-width:25px; border: solid 1px black; text-align:center; vertical-align: middle; font: normal 10px arial;}
 
 #heiho-view-tbody tr:hover td {background:lightyellow}
 #heiho-view-tbody tr:hover td:hover {background:khaki}
 #heiho-view-tbody tr:hover td:first-child {background:orange; color:#111}
 
-#heiho-view-tbody tr.heiho-header td {font-weight:bold}
+#heiho-view-tbody tr.heiho-header td {font-weight:bold; white-space: nowrap}
 
 #heiho-view-truncated {color:white; padding: .45em; background:#844; font: normal 11px arial;}
