@@ -1,6 +1,6 @@
 {
 	"name": "heiho",
-	"version": "0.4",
+	"version": "0.3.2",
 	"description": "Quick spreadsheet viewer in vanilla JS",
 	"main": "heiho.js",
 	"repository":
