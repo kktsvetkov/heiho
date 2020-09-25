@@ -1,5 +1,5 @@
 {
-	"name": "heiho",
+	"name": "@kktsvetkov/heiho",
 	"version": "0.3.2",
 	"description": "Quick spreadsheet viewer in vanilla JS",
 	"main": "heiho.js",
@@ -12,5 +12,6 @@
 	"license": "MIT",
 	"keywords": ["spreadsheet", "heiho", "csv"],
 	"homepage": "https://kktsvetkov.github.io/heiho",
-  	"bugs": "https://github.com/kktsvetkov/heiho/issues"
+  	"bugs": "https://github.com/kktsvetkov/heiho/issues",
+	"publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
