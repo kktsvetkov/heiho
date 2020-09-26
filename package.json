@@ -1,0 +1,16 @@
+{
+	"name": "@kktsvetkov/heiho",
+	"version": "0.3.4",
+	"description": "Quick spreadsheet viewer in vanilla JS",
+	"main": "heiho.js",
+	"repository":
+	{
+		"url": "https://github.com/kktsvetkov/heiho",
+		"type": "git"
+	},
+	"author": "Kaloyan (KT) Tsvetkov <kaloyan@kaloyan.info>",
+	"license": "MIT",
+	"keywords": ["spreadsheet", "heiho", "csv"],
+	"homepage": "https://kktsvetkov.github.io/heiho",
+  	"bugs": "https://github.com/kktsvetkov/heiho/issues"
+}

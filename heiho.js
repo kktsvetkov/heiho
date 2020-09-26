@@ -267,11 +267,16 @@
 		window.addEventListener('resize', windowResize);
 
 		/* close button */
+		const scrollReset = {top: 0, left: 0, behavior: 'auto'};
+		var scrollTo = scrollReset;
 		el.close.addEventListener('click', function (event)
 		{
 			document.body.classList.remove('heiho-body');
 			document.body.removeChild(el.shell);
 			window.removeEventListener('resize', windowResize);
+
+			document.body.scrollTo( scrollTo );
+			scrollTo = scrollReset;
 		});
 
 		var columns = cols(data);
@@ -369,6 +374,8 @@
 		}
 
 		/* finally show the preview and hive everything else in the body */
+		scrollTo.top = document.body.scrollTop;
+		scrollTo.left = document.body.scrollLeft;
 		document.body.classList.add('heiho-body');
 		el.shell.style.display = '';
 		resize(el);
