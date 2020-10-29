@@ -3,9 +3,7 @@
 * @link https://github.com/kktsvetkov/heiho
 */
 
-/* Hide all body element but the preview when the preview is open */
-body.heiho-body > * {display:none}
-body.heiho-body > #heiho-view {display: block}
+body.heiho-body {overflow:hidden}
 
 /*
 * #heiho-view
